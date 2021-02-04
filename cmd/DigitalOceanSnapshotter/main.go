@@ -14,7 +14,7 @@ import (
 	"github.com/slack-go/slack"
 )
 
-const createdAtFormat = "2006-01-02T15:04:05Z0700"
+const createdAtFormat = "2006-01-02T15:04:05Z"
 
 type snapshotterContext struct {
 	DoContext    *DigitalOceanContext
