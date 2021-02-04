@@ -94,7 +94,7 @@ func main() {
 
 		_, _, err = ctx.DoContext.CreateSnapshot(&godo.SnapshotCreateRequest{
 			VolumeID: volume.ID,
-			Name:     fmt.Sprintf("%s-%s", volume.Name, time.Now().Format("2006-01-02 15:04:05")),
+			Name:     time.Now().Format("2006-01-02T15:04:05"),
 		})
 		if err != nil {
 			handleError(ctx, err, true)
