@@ -28,7 +28,7 @@ func initLogging() {
 
 	log.SetOutput(os.Stdout)
 
-	log.SetLevel(log.WarnLevel)
+	log.SetLevel(log.InfoLevel)
 }
 
 func main() {
