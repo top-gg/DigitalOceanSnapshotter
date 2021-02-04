@@ -88,7 +88,7 @@ func main() {
 	for _, volumeID := range volumeIDs {
 		volume, _, err := ctx.DoContext.GetVolume(volumeID)
 		if err != nil {
-			errorHandling(ctx, err, true)
+			handleError(ctx, err, true)
 			return
 		}
 
@@ -97,7 +97,7 @@ func main() {
 			Name:     fmt.Sprintf("%s-%s", volume.Name, time.Now().Format("2006-01-02 15:04:05")),
 		})
 		if err != nil {
-			errorHandling(ctx, err, true)
+			handleError(ctx, err, true)
 			return
 		}
 
@@ -109,12 +109,12 @@ func main() {
 			sort.SliceStable(snapshots, func(firstIndex, secondIndex int) bool {
 				firstTime, err := time.Parse(snapshots[firstIndex].Created, createdAtFormat)
 				if err != nil {
-					errorHandling(ctx, err, true)
+					handleError(ctx, err, true)
 				}
 
 				secondTime, err := time.Parse(snapshots[firstIndex].Created, createdAtFormat)
 				if err != nil {
-					errorHandling(ctx, err, true)
+					handleError(ctx, err, true)
 				}
 
 				return firstTime.Before(secondTime)
@@ -126,7 +126,7 @@ func main() {
 				_, err := ctx.DoContext.DeleteSnapshot(snapshots[i].ID)
 
 				if err != nil {
-					errorHandling(ctx, err, false)
+					handleError(ctx, err, false)
 					return
 				}
 			}
@@ -134,7 +134,7 @@ func main() {
 	}
 }
 
-func errorHandling(ctx snapshotterContext, err error, fatal bool) {
+func handleError(ctx snapshotterContext, err error, fatal bool) {
 	errString := err.Error()
 
 	if ctx.SlackContext != nil {
