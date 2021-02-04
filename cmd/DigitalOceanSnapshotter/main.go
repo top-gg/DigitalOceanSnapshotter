@@ -140,7 +140,7 @@ func handleError(ctx snapshotterContext, err error, fatal bool) {
 	if ctx.SlackContext != nil {
 		err = ctx.SlackContext.SendEvent(errString, log.ErrorLevel)
 		if err != nil {
-			log.Error(fmt.Sprintf("Error while trying to send error to Slack %s", err.Error()))
+			log.Error(fmt.Sprintf("Error while trying to send error to Slack: %s", err.Error()))
 		}
 	}
 
