@@ -107,12 +107,12 @@ func main() {
 
 		if snapshotLength > snapshotCount {
 			sort.SliceStable(snapshots, func(firstIndex, secondIndex int) bool {
-				firstTime, err := time.Parse(snapshots[firstIndex].Created, createdAtFormat)
+				firstTime, err := time.Parse(createdAtFormat, snapshots[firstIndex].Created)
 				if err != nil {
 					handleError(ctx, err, true)
 				}
 
-				secondTime, err := time.Parse(snapshots[firstIndex].Created, createdAtFormat)
+				secondTime, err := time.Parse(createdAtFormat, snapshots[firstIndex].Created)
 				if err != nil {
 					handleError(ctx, err, true)
 				}
