@@ -136,6 +136,13 @@ func main() {
 			}
 		}
 	}
+
+	if ctx.SlackContext != nil {
+		err = ctx.SlackContext.SendEvent(fmt.Sprintf("Successfully created Backup for Volumes %s", strings.Join(volumeIDs, ", ")), log.InfoLevel)
+		if err != nil {
+			handleError(ctx, err, false)
+		}
+	}
 }
 
 func handleError(ctx snapshotterContext, err error, fatal bool) {
