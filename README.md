@@ -1,7 +1,7 @@
-# DigitalOceanSnapshotter
+# DigitalOcean Snapshotter
 [![Docker Pulls](https://img.shields.io/docker/pulls/topgg/digitaloceansnapshotter.svg)](https://hub.docker.com/r/topgg/digitaloceansnapshotter/)
 
-Simple Digital Ocean Volumes Backup Service using Snapshots
+Simple Digital Ocean Volume Backup Service using Snapshots
 
 ## Getting Started
 
