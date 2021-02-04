@@ -92,7 +92,7 @@ func main() {
 			return
 		}
 
-		_, _, err = ctx.DoContext.CreateSnapshot(&godo.SnapshotCreateRequest{
+		snapshot, _, err := ctx.DoContext.CreateSnapshot(&godo.SnapshotCreateRequest{
 			VolumeID: volume.ID,
 			Name:     time.Now().Format("2006-01-02T15:04:05"),
 		})
@@ -100,6 +100,8 @@ func main() {
 			handleError(ctx, err, true)
 			return
 		}
+
+		log.Info(fmt.Sprintf("Created Snapshot with Id %s from volume %s", snapshot.ID, volume.Name))
 
 		snapshots, _, err := ctx.DoContext.ListSnapshots(volume.ID, nil)
 
@@ -123,12 +125,14 @@ func main() {
 			snapshotsToDelete := snapshotLength - snapshotCount
 
 			for i := 0; i < snapshotsToDelete; i++ {
-				_, err := ctx.DoContext.DeleteSnapshot(snapshots[i].ID)
-
+				snapshotToDeleteID := snapshots[i].ID
+				_, err := ctx.DoContext.DeleteSnapshot(snapshotToDeleteID)
 				if err != nil {
 					handleError(ctx, err, false)
 					return
 				}
+
+				log.Info(fmt.Sprintf("Deleted Snapshot with Id %s", snapshotToDeleteID))
 			}
 		}
 	}
