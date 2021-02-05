@@ -112,7 +112,7 @@ func main() {
 					handleError(ctx, err, true)
 				}
 
-				secondTime, err := time.Parse(createdAtFormat, snapshots[firstIndex].Created)
+				secondTime, err := time.Parse(createdAtFormat, snapshots[secondIndex].Created)
 				if err != nil {
 					handleError(ctx, err, true)
 				}
