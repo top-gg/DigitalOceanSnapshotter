@@ -89,7 +89,6 @@ func main() {
 		volume, _, err := ctx.DoContext.GetVolume(volumeID)
 		if err != nil {
 			handleError(ctx, err, true)
-			return
 		}
 
 		snapshot, _, err := ctx.DoContext.CreateSnapshot(&godo.SnapshotCreateRequest{
@@ -98,7 +97,6 @@ func main() {
 		})
 		if err != nil {
 			handleError(ctx, err, true)
-			return
 		}
 
 		log.Info(fmt.Sprintf("Created Snapshot with Id %s from volume %s", snapshot.ID, volume.Name))
